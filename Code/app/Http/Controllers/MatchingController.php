@@ -61,7 +61,12 @@ class MatchingController extends Controller
         if ($matching === null) {
             return response()->json(['request' =>false],401);
         }
-        $matching->update();
+        $matching->update($request->all(),[
+            'team1' => 'required|string|max:50',
+            'team2' => 'required|string|max:50',
+            'time' => 'required|date_format:H:i:s',
+            'event_id' => 'required|integer'
+        ]);
         return response()->json(['request' =>'success','data'=>$matching],200);
     }
 

@@ -52,7 +52,9 @@ class SportController extends Controller
         if ($sport === null) {
             return response()->json(['request' =>false],401);
         }
-        $sport->update();
+        $sport->update($request->all(),[
+            'name' => 'required|max:20',
+        ]);
         return response()->json(['message'=>'Sport update successfully','data'=>$sport],200);
     }
 

@@ -23,11 +23,11 @@ class StadiumController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = Validator::make($request->all([
+        $validated = Validator::make($request->all(),[
             'name'=> 'required|string|max:100',
             'ZoneA' => 'required|integer',
             'ZoneB' => 'required|integer',
-        ]));
+        ]);
         if ($validated->failed()) {
             return response()->json([$validated->errors()],401);
         }
@@ -50,13 +50,17 @@ class StadiumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $requet, $id)
+    public function update(Request $request,$id)
     {
         $stadium = Stadium::find($id);
         if ($stadium === null) {
             return response()->json(['request'=>'id not found'],401);
         }
-        $stadium->update();
+        $stadium->update($request->all(),[
+            'name'=> 'required|string|max:100',
+            'ZoneA' => 'required|integer',
+            'ZoneB' => 'required|integer',
+        ]);
         return response()->json(['request'=>'updated successfully','data'=>$stadium],200);
     }
 
