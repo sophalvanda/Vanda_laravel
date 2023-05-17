@@ -19,7 +19,7 @@ class EventSeeder extends Seeder
                 'numberOfSeats' => 25000,
                 'date' => '2023-05-16',
                 'stadium_id' => 1,
-                'sport_id' => 15
+                'sport_id' => 4
             ],
             [
                 'name' => 'Women U22 Football',
@@ -27,7 +27,7 @@ class EventSeeder extends Seeder
                 'numberOfSeats' => 25000,
                 'date' => '2023-05-16',
                 'stadium_id' => 1,
-                'sport_id' => 15
+                'sport_id' => 4
             ],
             [
                 'name' => 'Women U22 Basketball',
@@ -35,7 +35,7 @@ class EventSeeder extends Seeder
                 'numberOfSeats' => 25000,
                 'date' => '2023-05-16',
                 'stadium_id' => 2,
-                'sport_id' => 4
+                'sport_id' => 1
             ],
         ];
         foreach ($events as $event) {

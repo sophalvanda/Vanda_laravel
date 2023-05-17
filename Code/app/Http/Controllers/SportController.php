@@ -14,18 +14,13 @@ class SportController extends Controller
      */
     public function index()
     {
-        //
+        $sport = Sport::all();
+        return response()->json(['massage'=>true,'data'=>$sport],200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    // public function rule()
-    // {
-    //     return [
-    //         'name' => 'required|name|unique:name'
-    //     ];
-    // }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),
@@ -42,24 +37,35 @@ class SportController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Sport $sport)
+    public function show($id)
     {
-        //
+        $sport =Sport::find($id);
+        return response()->json(['message'=>'Sport show successfully','data'=>$sport],200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sport $sport)
+    public function update(Request $request, $id)
     {
-        //
+        $sport =Sport::find($id);
+        if ($sport === null) {
+            return response()->json(['request' =>false],401);
+        }
+        $sport->update();
+        return response()->json(['message'=>'Sport update successfully','data'=>$sport],200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sport $sport)
+    public function destroy($id)
     {
-        //
+        $sport = Sport::find($id);
+        if ($sport === null){
+            return response()->json(['message'=>'Sport not found'],401);
+        }
+        $sport->delete();
+        return response()->json(['message'=>'Sport deleted successfully'],200);
     }
 }

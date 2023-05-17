@@ -43,24 +43,38 @@ class MatchingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show($id)
     {
-        //
+        $matching = Matching::find($id);
+        if ($matching === null) {
+            return response()->json(['request' =>false],401);
+        }
+        return response()->json(['request' =>'success','data'=>$matching],200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        //
+        $matching = Matching::find($id);
+        if ($matching === null) {
+            return response()->json(['request' =>false],401);
+        }
+        $matching->update();
+        return response()->json(['request' =>'success','data'=>$matching],200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy($id)
     {
-        //
+        $matching = Matching::find($id);
+        if ($matching === null) {
+            return response()->json(['request' =>false],401);
+        }
+        $matching->delete();
+        return response()->json(['request' =>'Matching deleted success'],200);
     }
 }
